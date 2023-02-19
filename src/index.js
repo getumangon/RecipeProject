@@ -1,31 +1,13 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Router, Stack } from 'react-native-router-flux';
-import { PersistGate } from 'redux-persist/es/integration/react';
-
-import Routes from './routes/index';
-import Loading from './components/UI/Loading';
+import { Provider } from 'react-redux'
+import RecipeApp from './app/appMain';
+import { store } from './store';
 
 function App(props) {
-  const { store, persistor } = props;
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(false)
-  }, [])
-
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
-      <Provider store={store}>
-        <PersistGate loading={<Loading />} persistor={persistor}>
-            <Router>
-              <Stack key="root">{Routes}</Stack>
-            </Router>
-        </PersistGate>
-      </Provider>
+    <Provider store={store}>
+      <RecipeApp />
+    </Provider>
   );
 }
 
